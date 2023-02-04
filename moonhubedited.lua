@@ -164,30 +164,27 @@ while true do
 end
 end)
 
-UsefulScriptsSection:NewButton("SnipeV2", "Set meteor to Y", function()
-    local function toggleLoop()
-        local isActive = true
-        while isActive do
-            local args = {
-                [1] = "skill",
-                [2] = 1675511977.0508888,
-                [3] = 3
-            }
+UsefulScriptsSection:NewButton("SnipeV2 / MeteorNuker", "Set meteor to Y", function()
+    local args = {
+        [1] = "skill",
+        [2] = 1675535457.8575954,
+        [3] = 3
+    }
     
+    local toggle = false
+    
+    game:GetService("UserInputService").InputBegan:Connect(function(input)
+        if input.KeyCode == Enum.KeyCode.N then
+            toggle = not toggle
+        end
+    end)
+    
+    while true do
+        if toggle then
             game:GetService("ReplicatedStorage").func:InvokeServer(unpack(args))
-            wait()
-    
-            if game:GetService("UserInputService"):IsKeyDown(Enum.KeyCode.B) then
-                isActive = not isActive
-            end
         end
-    end
-    
-    game:GetService("UserInputService").InputBegan:Connect(function(inputObject)
-        if inputObject.KeyCode == Enum.KeyCode.B then
-            toggleLoop()
-        end
-    end)   
+        wait()
+    end   
 end)
 
 UsefulScriptsSection:NewButton("AutoCharge", "Set F for charge and N for toggle", function()
